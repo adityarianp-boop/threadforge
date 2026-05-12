@@ -1,0 +1,2 @@
+import { LanguageSwitcher } from "@/components/language/language-switcher";
+export default function SettingsPage(){return <div className="space-y-4"><div className="rounded-xl border border-borderSoft bg-surface p-4"><p className="mb-2 text-sm text-textSecondary">Language</p><LanguageSwitcher/></div><div className="rounded-xl border border-borderSoft bg-surface p-4 text-sm text-textSecondary">Theme: TODO</div><div className="rounded-xl border border-borderSoft bg-surface p-4 text-sm text-textSecondary">AI Model: TODO</div></div>}

@@ -1,0 +1,63 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "generator": "Generator",
+    "ideas": "Idea Engine",
+    "atm": "ATM Analyzer",
+    "calendar": "Calendar",
+    "history": "History",
+    "viral": "Viral Research",
+    "settings": "Settings"
+  },
+  "shell": { "tagline": "Threads Intelligence Platform", "user": "User" },
+  "generator": {
+    "topicLabel": "Topic / experience / insight",
+    "topicPlaceholder": "Example: my client burned ad budget but forgot landing page optimization...",
+    "formatLabel": "Content format",
+    "toneLabel": "Tone",
+    "languageLabel": "Output language",
+    "generate": "Generate Threads content",
+    "regenerate": "Regenerate variant",
+    "generating": "Writing hook...",
+    "previewLabel": "Live preview",
+    "previewEmpty": "Your generated thread will appear here.",
+    "characters": "characters",
+    "copy": "Copy",
+    "retry": "Retry",
+    "topicMin": "Topic must be at least 3 characters.",
+    "error": "Something went wrong. Try again.",
+    "empty": "No output yet"
+  },
+  "ideas": {
+    "saveIdea": "Save idea",
+    "aiLabel": "Ask AI for new ideas",
+    "aiPlaceholder": "Example: uncommon Meta Ads angles that people rarely discuss...",
+    "generate": "Generate mindblowing ideas",
+    "loading": "Digging for insights...",
+    "retry": "Retry",
+    "copy": "Copy",
+    "copyResult": "Copy result",
+    "error": "Ideas generation failed. Try again.",
+    "empty": "No AI ideas yet."
+  },
+  "atm": {
+    "contentPlaceholder": "Paste Threads / Instagram / LinkedIn content here...",
+    "contextPlaceholder": "Business context (optional)",
+    "analyze": "Analyze and adapt",
+    "variant": "Variation hook",
+    "loading": "Breaking down post...",
+    "observe": "Observe",
+    "extract": "Extract formula",
+    "modify": "Modify",
+    "copy": "Copy",
+    "retry": "Retry",
+    "error": "ATM analysis failed. Try again.",
+    "empty": "No ATM output yet."
+  },
+  "calendar": { "weekPlan": "Weekly posting plan" },
+  "history": {
+    "search": "Search saved history",
+    "clear": "Clear all",
+    "empty": "No saved history yet."
+  }
+}

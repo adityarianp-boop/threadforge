@@ -1,0 +1,63 @@
+{
+  "nav": {
+    "dashboard": "Dasbor",
+    "generator": "Generator",
+    "ideas": "Mesin Ide",
+    "atm": "Penganalisis ATM",
+    "calendar": "Kalender",
+    "history": "Riwayat",
+    "viral": "Riset Viral",
+    "settings": "Pengaturan"
+  },
+  "shell": { "tagline": "Platform Intelijen Konten Threads", "user": "Pengguna" },
+  "generator": {
+    "topicLabel": "Topik / pengalaman / insight",
+    "topicPlaceholder": "Contoh: klien saya buang budget ads tapi lupa optimalkan landing page...",
+    "formatLabel": "Format konten",
+    "toneLabel": "Tone",
+    "languageLabel": "Bahasa output",
+    "generate": "Generate konten Threads",
+    "regenerate": "Variasi lain",
+    "generating": "Menulis hook...",
+    "previewLabel": "Preview live",
+    "previewEmpty": "Konten Threads hasil generate akan muncul di sini.",
+    "characters": "karakter",
+    "copy": "Salin",
+    "retry": "Coba lagi",
+    "topicMin": "Topik minimal 3 karakter.",
+    "error": "Terjadi masalah. Coba lagi.",
+    "empty": "Belum ada output"
+  },
+  "ideas": {
+    "saveIdea": "Simpan ide",
+    "aiLabel": "Minta ide baru dari AI",
+    "aiPlaceholder": "Contoh: sudut Meta Ads yang jarang dibahas orang...",
+    "generate": "Generate ide mindblowing",
+    "loading": "Menggali insight...",
+    "retry": "Coba lagi",
+    "copy": "Salin",
+    "copyResult": "Salin hasil",
+    "error": "Generate ide gagal. Coba lagi.",
+    "empty": "Belum ada ide AI."
+  },
+  "atm": {
+    "contentPlaceholder": "Paste konten Threads / Instagram / LinkedIn di sini...",
+    "contextPlaceholder": "Konteks bisnismu (opsional)",
+    "analyze": "Analisis dan adaptasi",
+    "variant": "Variasi hook",
+    "loading": "Membedah postingan...",
+    "observe": "Amati",
+    "extract": "Tiru",
+    "modify": "Modifikasi",
+    "copy": "Salin",
+    "retry": "Coba lagi",
+    "error": "ATM gagal dijalankan. Coba lagi.",
+    "empty": "Belum ada output ATM."
+  },
+  "calendar": { "weekPlan": "Rencana posting minggu ini" },
+  "history": {
+    "search": "Cari riwayat tersimpan",
+    "clear": "Hapus semua",
+    "empty": "Belum ada riwayat tersimpan."
+  }
+}
