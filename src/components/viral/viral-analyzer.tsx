@@ -358,7 +358,7 @@ export function ViralAnalyzer() {
                 </span>
               </div>
 
-              <p className="text-sm italic leading-6 text-textSecondary">"{idea.hook}"</p>
+              <p className="text-sm italic leading-6 text-textSecondary">{`${idea.hook}`}</p>
 
               <div className="flex items-center justify-between">
                 <span className="rounded-full border border-borderSoft bg-surfaceSecondary px-2 py-0.5 text-xs text-textSecondary">

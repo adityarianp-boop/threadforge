@@ -15,7 +15,7 @@ export function HistoryList() {
   const filterItems = useHistoryStore((state) => state.filterItems);
   const clearAll = useHistoryStore((state) => state.clearAll);
 
-  const filtered = useMemo(() => filterItems(query, kind), [filterItems, kind, query, items]);
+  const filtered = useMemo(() => filterItems(query, kind), [filterItems, kind, query]);
 
   return (
     <div className="space-y-3">
