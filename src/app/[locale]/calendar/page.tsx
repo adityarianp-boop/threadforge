@@ -21,7 +21,7 @@ export default async function CalendarPage() {
           ))}
           {cells.map((day, index) => {
             if (!day) return <div key={`empty-${index}`} className="aspect-square" />;
-            const hasPost = calendarConfig.postDays.includes(day);
+            const hasPost = (calendarConfig.postDays as readonly number[]).includes(day);
             const isToday = day === calendarConfig.today;
             return (
               <div key={day} className={`flex aspect-square items-center justify-center rounded-md border text-xs ${hasPost ? "border-borderSoft bg-surfaceSecondary" : "border-transparent"} ${isToday ? "ring-1 ring-accent" : ""}`}>
