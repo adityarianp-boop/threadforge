@@ -25,7 +25,7 @@ export function AtmAnalyzer() {
 
   const run = async (regenerate = false) => {
     if (inputMode === "link") {
-      setError("Link tidak bisa dianalisis langsung. Salin teks postingan Threads-nya, lalu paste di tab 'Paste Konten'.");
+      setError("Link tidak bisa dianalisis langsung. Salin teks postingan Threads-nya, lalu paste di tab Paste Konten.");
       return;
     }
     if (inputMode === "link" && !link.trim()) return;
@@ -105,10 +105,10 @@ ${data.modifikasi}`, locale });
               type="url"
             />
             <p className="text-xs text-textSecondary mt-1">
-              💡 Threads tidak mengizinkan akses konten via link. Salin teks postingannya, lalu gunakan tab 'Paste Konten'.
+              💡 Threads tidak mengizinkan akses konten via link. Salin teks postingannya, lalu gunakan tab Paste Konten.
             </p>
             <p className="text-xs text-textSecondary mt-2">
-              Threads tidak mengizinkan fetch konten via link. Gunakan tab ini sebagai referensi saja, atau switch ke 'Paste Konten' untuk analisis langsung.
+              Threads tidak mengizinkan fetch konten via link. Gunakan tab ini sebagai referensi saja, atau switch ke tab Paste Konten untuk analisis langsung.
             </p>
           </>
         ) : (
