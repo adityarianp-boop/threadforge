@@ -105,10 +105,10 @@ ${data.modifikasi}`, locale });
               type="url"
             />
             <p className="text-xs text-textSecondary mt-1">
-              💡 Threads tidak mengizinkan akses konten via link. Salin teks postingannya, lalu gunakan tab "Paste Konten".
+              💡 Threads tidak mengizinkan akses konten via link. Salin teks postingannya, lalu gunakan tab 'Paste Konten'.
             </p>
             <p className="text-xs text-textSecondary mt-2">
-              Threads tidak mengizinkan fetch konten via link. Gunakan tab ini sebagai referensi saja, atau switch ke "Paste Konten" untuk analisis langsung.
+              Threads tidak mengizinkan fetch konten via link. Gunakan tab ini sebagai referensi saja, atau switch ke 'Paste Konten' untuk analisis langsung.
             </p>
           </>
         ) : (
