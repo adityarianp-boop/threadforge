@@ -33,7 +33,7 @@ export function AtmAnalyzer() {
     setError("");
     try {
       const body =
-        inputMode === "link"
+        (inputMode as string) === "link"
           ? { content: "", link, context, locale, regenerate }
           : { content, link: "", context, locale, regenerate };
 
