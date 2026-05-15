@@ -24,6 +24,10 @@ export function AtmAnalyzer() {
   const [error, setError] = useState("");
 
   const run = async (regenerate = false) => {
+    if (inputMode === "link") {
+      setError("Link tidak bisa dianalisis langsung. Salin teks postingan Threads-nya, lalu paste di tab 'Paste Konten'.");
+      return;
+    }
     if (inputMode === "link" && !link.trim()) return;
     if (inputMode === "paste" && !content.trim()) return;
     setLoading(true);
@@ -74,7 +78,7 @@ ${data.modifikasi}`, locale });
               inputMode === "link" ? "bg-surface font-medium" : "text-textSecondary hover:bg-surface/60"
             ].join(" ")}
           >
-            Link
+            Link (Referensi)
           </button>
           <button
             type="button"
@@ -92,13 +96,21 @@ ${data.modifikasi}`, locale });
         </div>
 
         {inputMode === "link" ? (
-          <input
-            value={link}
-            onChange={(e) => setLink(e.target.value)}
-            className="w-full rounded-xl border border-borderSoft bg-surfaceSecondary p-3 text-sm"
-            placeholder="Paste link postingan Threads atau LinkedIn..."
-            type="url"
-          />
+          <>
+            <input
+              value={link}
+              onChange={(e) => setLink(e.target.value)}
+              className="w-full rounded-xl border border-borderSoft bg-surfaceSecondary p-3 text-sm"
+              placeholder="Paste link postingan Threads atau LinkedIn..."
+              type="url"
+            />
+            <p className="text-xs text-textSecondary mt-1">
+              💡 Threads tidak mengizinkan akses konten via link. Salin teks postingannya, lalu gunakan tab "Paste Konten".
+            </p>
+            <p className="text-xs text-textSecondary mt-2">
+              Threads tidak mengizinkan fetch konten via link. Gunakan tab ini sebagai referensi saja, atau switch ke "Paste Konten" untuk analisis langsung.
+            </p>
+          </>
         ) : (
           <textarea
             value={content}

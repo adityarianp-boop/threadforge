@@ -50,7 +50,10 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "content or link is required" }, { status: 400 });
     }
 
-    const contentToAnalyze = input.content || input.link || "";
+    const isLinkOnly = !input.content && input.link;
+    const contentToAnalyze = isLinkOnly
+      ? `[USER PROVIDED A THREADS/INSTAGRAM LINK: ${input.link}]\n\nIMPORTANT: You cannot fetch this URL. Ask the user to paste the actual post text instead. Return this exact JSON:\n{"amati": "Link tidak bisa dianalisis langsung. Silakan paste teks konten postingannya di kolom 'Paste Konten'.", "tiru": "Salin teks dari postingan yang ingin dianalisis, lalu paste di tab 'Paste Konten'.", "modifikasi": "Belum bisa dibuat karena konten belum tersedia. Paste teks postingannya dulu ya."}`
+      : input.content || "";
     const prompt = buildAtmPrompt({
       ...input,
       content: contentToAnalyze,
