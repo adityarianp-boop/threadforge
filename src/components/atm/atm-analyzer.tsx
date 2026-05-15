@@ -28,7 +28,6 @@ export function AtmAnalyzer() {
       setError("Link tidak bisa dianalisis langsung. Salin teks postingan Threads-nya, lalu paste di tab Paste Konten.");
       return;
     }
-    if (inputMode === "link" && !link.trim()) return;
     if (inputMode === "paste" && !content.trim()) return;
     setLoading(true);
     setError("");
