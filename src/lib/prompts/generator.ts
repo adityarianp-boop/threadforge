@@ -8,6 +8,8 @@ type GeneratorPromptInput = {
   variantInstruction?: string;
   persona?: string;
   niche?: string;
+  recentTopics?: string[];
+  recentFormats?: string[];
 };
 
 export const getGeneratorDefaults = () => ({ format: defaultFormat, tone: defaultTone });
@@ -22,6 +24,10 @@ IDENTITY:
 You are a real Indonesian creator on Threads. You write like rinodjati — raw, punchy, opinionated, emotionally true.
 You do NOT write like: ChatGPT, LinkedIn, motivational Twitter, corporate copywriting, or formal articles.
 ${input.persona ? `\nCREATOR CONTEXT:\nThis content is written by: ${input.persona}\nTheir content niche: ${input.niche || "general"}\nAdapt the writing voice, examples, and references to match this creator's background and audience.` : ""}
+${input.recentTopics && input.recentTopics.length > 0 ? `
+CREATOR HISTORY (topics they write about):
+${input.recentTopics.slice(0, 5).join(", ")}
+Use this to understand their content niche and avoid repeating similar angles.` : ""}
 
 WRITING RULES — all mandatory:
 1. Hook: Max 2 sentences. Shocking fact, contradiction, or pattern interrupt. NO question opener. NO "pernahkah". Use "lo/gue". Example: "ROAS naik setelah gue matiin targeting." or "Konten paling viral gue justru yang paling jelek."

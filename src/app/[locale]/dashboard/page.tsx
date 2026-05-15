@@ -1,11 +1,12 @@
 "use client";
 
+import { useState } from "react";
 import { FlaskConical, Lightbulb, TrendingUp, Wand2 } from "lucide-react";
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
-import { Card } from "@/components/shared/card";
 import { Button } from "@/components/shared/button";
+import { Card } from "@/components/shared/card";
 import { useHistoryStore } from "@/store/history-store";
 import { useSettingsStore } from "@/store/settings-store";
 import type { HistoryKind } from "@/types/history";
@@ -18,11 +19,48 @@ function reusePath(locale: string, kind: HistoryKind) {
 
 export default function DashboardPage() {
   useTranslations();
-  const locale = useLocale();
+  const [quickTopic, setQuickTopic] = useState("");
+  const [quickLoading, setQuickLoading] = useState(false);
+  const [quickResult, setQuickResult] = useState("");
   const router = useRouter();
-  const persona = useSettingsStore((s) => s.persona);
-  const niche = useSettingsStore((s) => s.niche);
+  const locale = useLocale();
+  const { persona, niche, defaultTone, defaultFormat } = useSettingsStore();
   const items = useHistoryStore((state) => state.items);
+
+  const starterPrompts = [
+    "Kenapa ROAS tinggi belum tentu bisnis untung",
+    "Hal yang gue pelajari setelah gagal di bulan pertama",
+    "Kesalahan yang sering dilakukan owner skincare lokal",
+    "Loker host live streaming: peluang atau jebakan?",
+    "Kenapa konten jelek kadang lebih viral dari yang rapi"
+  ];
+
+  const quickGenerate = async () => {
+    if (!quickTopic.trim() || quickTopic.trim().length < 3) return;
+    setQuickLoading(true);
+    setQuickResult("");
+    try {
+      const res = await fetch("/api/generate", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          topic: quickTopic,
+          format: defaultFormat || "insight",
+          tone: defaultTone || "casual",
+          locale,
+          regenerate: false,
+          persona,
+          niche
+        })
+      });
+      const data = await res.json();
+      if (data.content) setQuickResult(data.content);
+    } catch {
+      /* ignore */
+    } finally {
+      setQuickLoading(false);
+    }
+  };
 
   const totalGenerate = items.filter((item) => item.kind === "generator").length;
   const totalAtm = items.filter((item) => item.kind === "atm").length;
@@ -45,6 +83,69 @@ export default function DashboardPage() {
 
   return (
     <div className="space-y-8">
+      <Card className="space-y-3">
+        <div>
+          <p className="text-xs uppercase tracking-wider text-textSecondary">Quick Generate</p>
+          <p className="mt-1 text-sm text-textSecondary">Tulis topik atau pilih starter prompt di bawah</p>
+        </div>
+
+        <div className="flex flex-wrap gap-2">
+          {starterPrompts.map((prompt) => (
+            <button
+              key={prompt}
+              type="button"
+              onClick={() => setQuickTopic(prompt)}
+              className="rounded-full border border-borderSoft bg-surfaceSecondary px-3 py-1 text-xs text-textSecondary transition-colors hover:border-accent hover:text-textPrimary"
+            >
+              {prompt}
+            </button>
+          ))}
+        </div>
+
+        <div className="flex gap-2">
+          <input
+            type="text"
+            value={quickTopic}
+            onChange={(e) => setQuickTopic(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && quickGenerate()}
+            placeholder="Ketik topik konten Threads kamu..."
+            className="flex-1 rounded-xl border border-borderSoft bg-surfaceSecondary px-3 py-2 text-sm outline-none focus:border-accent"
+          />
+          <Button type="button" onClick={quickGenerate} disabled={quickLoading || quickTopic.trim().length < 3}>
+            {quickLoading ? "..." : "Generate →"}
+          </Button>
+        </div>
+
+        {quickLoading && (
+          <div className="space-y-2">
+            <div className="h-3 w-full animate-pulse rounded bg-surfaceSecondary" />
+            <div className="h-3 w-4/5 animate-pulse rounded bg-surfaceSecondary" />
+            <div className="h-3 w-3/5 animate-pulse rounded bg-surfaceSecondary" />
+          </div>
+        )}
+
+        {quickResult && !quickLoading && (
+          <div className="space-y-2">
+            <pre className="whitespace-pre-wrap text-sm leading-7">{quickResult}</pre>
+            <div className="flex gap-2">
+              <Button size="sm" variant="outline" onClick={() => navigator.clipboard.writeText(quickResult)}>
+                Salin
+              </Button>
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => {
+                  sessionStorage.setItem("threadforge-reuse", JSON.stringify({ kind: "generator", content: quickTopic }));
+                  router.push("/generator" as any);
+                }}
+              >
+                Buka di Generator →
+              </Button>
+            </div>
+          </div>
+        )}
+      </Card>
+
       <section>
         {hasPersona ? (
           <h1 className="text-2xl font-semibold text-textPrimary">

@@ -7,6 +7,7 @@
     "calendar": "Calendar",
     "history": "History",
     "viral": "Viral Research",
+    "workspace": "Workspace",
     "settings": "Settings"
   },
   "shell": { "tagline": "Threads Intelligence Platform", "user": "User" },

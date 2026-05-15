@@ -9,12 +9,14 @@ import { defaultFormat, defaultTone, formatOptions, toneOptions, type FormatId, 
 import { downloadTextFile, toMarkdown } from "@/lib/utils/export";
 import { useHistoryStore } from "@/store/history-store";
 import { useSettingsStore } from "@/store/settings-store";
+import { useWorkspaceStore } from "@/store/workspace-store";
 
 export function GeneratorForm() {
   const routeLocale = useLocale() as "en" | "id";
   const t = useTranslations("generator");
   const addItem = useHistoryStore((state) => state.addItem);
-  const { persona, niche } = useSettingsStore();
+  const { persona, niche, recentTopics, recentFormats, addRecentTopic, addRecentFormat } = useSettingsStore();
+  const saveDraft = useWorkspaceStore((state) => state.saveDraft);
 
   const [topic, setTopic] = useState("");
   const [format, setFormat] = useState<FormatId>(defaultFormat);
@@ -41,7 +43,17 @@ export function GeneratorForm() {
       const res = await fetch("/api/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ topic, format, tone, locale, regenerate, persona, niche })
+        body: JSON.stringify({
+          topic,
+          format,
+          tone,
+          locale,
+          regenerate,
+          persona,
+          niche,
+          recentTopics,
+          recentFormats
+        })
       });
       const data = await res.json();
 
@@ -54,6 +66,8 @@ export function GeneratorForm() {
       setResult(content);
 
       if (content) {
+        addRecentTopic(topic);
+        addRecentFormat(format);
         addItem({
           kind: "generator",
           title: `${formatOptions.find((item) => item.id === format)?.label ?? "Generated"}: ${topic.slice(0, 72)}`,
@@ -141,6 +155,15 @@ export function GeneratorForm() {
           <Button type="button" size="sm" variant="outline" onClick={copy} disabled={!result}><Copy size={14} className="mr-1" />{t("copy")}</Button>
           <Button type="button" size="sm" variant="outline" onClick={() => downloadTextFile("threadforge-generation.txt", result)} disabled={!result}><Download size={14} className="mr-1" />TXT</Button>
           <Button type="button" size="sm" variant="outline" onClick={() => downloadTextFile("threadforge-generation.md", toMarkdown("ThreadForge Generation", result), "text/markdown;charset=utf-8")} disabled={!result}>MD</Button>
+          <Button
+            type="button"
+            size="sm"
+            variant="outline"
+            onClick={() => saveDraft({ topic, content: result, format, tone })}
+            disabled={!result}
+          >
+            Simpan Draft
+          </Button>
           <p className="ml-auto text-xs text-textSecondary">{result ? `${result.length} ${t("characters")}` : t("empty")}</p>
         </div>
       </Card>

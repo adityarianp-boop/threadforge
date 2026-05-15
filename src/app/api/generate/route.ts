@@ -13,7 +13,9 @@ const schema = z.object({
   locale: z.enum(["en", "id"]).default("en"),
   regenerate: z.boolean().optional(),
   persona: z.string().optional(),
-  niche: z.string().optional()
+  niche: z.string().optional(),
+  recentTopics: z.array(z.string()).optional(),
+  recentFormats: z.array(z.string()).optional()
 });
 
 const fallback = {
@@ -34,6 +36,8 @@ export async function POST(req: Request) {
       ...input,
       persona: input.persona,
       niche: input.niche,
+      recentTopics: input.recentTopics,
+      recentFormats: input.recentFormats,
       variantInstruction: input.regenerate ? "Create a DIFFERENT hook and a fresh angle from previous version." : undefined
     });
 
