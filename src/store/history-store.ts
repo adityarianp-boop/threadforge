@@ -10,7 +10,7 @@ const MAX_ITEMS = 200;
 const normalize = (value: string) => value.trim().replace(/\s+/g, " ").toLowerCase();
 
 const safeStorage = createJSONStorage(() => {
-  if (typeof window === "undefined") return undefined;
+  if (typeof window === "undefined") return localStorage;
   return window.localStorage;
 });
 

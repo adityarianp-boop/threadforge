@@ -47,11 +47,11 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             const href = `/${locale}${item.href}`;
             const active = pathname === href;
             const Icon = typeof item.icon === "string" ? iconByName[item.icon as keyof typeof iconByName] : item.icon;
-            const label = "key" in item ? tNav(item.key) : item.label[navLocale];
+            const label = "key" in item ? tNav((item as any).key) : (item as any).label[navLocale];
             return (
               <Link
-                key={"key" in item ? item.key : item.href}
-                href={href}
+                key={"key" in item ? (item as any).key : (item as any).href}
+                href={href as any}
                 onClick={() => setOpen(false)}
                 className={cn(
                   "flex items-center gap-2 rounded-xl px-3 py-2 text-sm text-textSecondary hover:bg-surfaceSecondary",
@@ -74,11 +74,11 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               const href = `/${locale}${item.href}`;
               const active = pathname === href;
               const Icon = typeof item.icon === "string" ? iconByName[item.icon as keyof typeof iconByName] : item.icon;
-              const label = "key" in item ? tNav(item.key) : item.label[navLocale];
+              const label = "key" in item ? tNav((item as any).key) : (item as any).label[navLocale];
               return (
                 <Link
-                  key={"key" in item ? item.key : item.href}
-                  href={href}
+                  key={"key" in item ? (item as any).key : (item as any).href}
+                  href={href as any}
                   className={cn(
                     "flex items-center gap-2 rounded-xl px-3 py-2 text-sm text-textSecondary hover:bg-surfaceSecondary",
                     active && "bg-surfaceSecondary text-textPrimary"

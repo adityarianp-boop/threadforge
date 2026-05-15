@@ -8,11 +8,13 @@ import { Card } from "@/components/shared/card";
 import { defaultFormat, defaultTone, formatOptions, toneOptions, type FormatId, type ToneId } from "@/lib/constants/options";
 import { downloadTextFile, toMarkdown } from "@/lib/utils/export";
 import { useHistoryStore } from "@/store/history-store";
+import { useSettingsStore } from "@/store/settings-store";
 
 export function GeneratorForm() {
   const routeLocale = useLocale() as "en" | "id";
   const t = useTranslations("generator");
   const addItem = useHistoryStore((state) => state.addItem);
+  const { persona, niche } = useSettingsStore();
 
   const [topic, setTopic] = useState("");
   const [format, setFormat] = useState<FormatId>(defaultFormat);
@@ -39,7 +41,7 @@ export function GeneratorForm() {
       const res = await fetch("/api/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ topic, format, tone, locale, regenerate })
+        body: JSON.stringify({ topic, format, tone, locale, regenerate, persona, niche })
       });
       const data = await res.json();
 

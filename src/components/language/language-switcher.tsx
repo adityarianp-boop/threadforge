@@ -9,7 +9,7 @@ export function LanguageSwitcher() {
   const switchLocale = (next: string) => {
     const parts = pathname.split("/");
     parts[1] = next;
-    router.push(parts.join("/"));
+    router.push(parts.join("/") as any);
   };
   return (
     <select value={locale} onChange={(e) => switchLocale(e.target.value)} className="rounded-lg border border-borderSoft bg-surfaceSecondary px-3 py-2 text-sm">

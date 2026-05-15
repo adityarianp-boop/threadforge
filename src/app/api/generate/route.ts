@@ -11,7 +11,9 @@ const schema = z.object({
   format: z.enum(["insight", "story", "myth", "tips", "hot_take", "case_study", "long_form"]),
   tone: z.enum(["casual", "bold", "empathetic", "expert"]),
   locale: z.enum(["en", "id"]).default("en"),
-  regenerate: z.boolean().optional()
+  regenerate: z.boolean().optional(),
+  persona: z.string().optional(),
+  niche: z.string().optional()
 });
 
 const fallback = {
@@ -30,6 +32,8 @@ export async function POST(req: Request) {
     const input = schema.parse(await req.json());
     const prompt = buildGeneratorPrompt({
       ...input,
+      persona: input.persona,
+      niche: input.niche,
       variantInstruction: input.regenerate ? "Create a DIFFERENT hook and a fresh angle from previous version." : undefined
     });
 
