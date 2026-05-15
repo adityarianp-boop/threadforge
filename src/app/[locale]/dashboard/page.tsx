@@ -40,7 +40,7 @@ export default function DashboardPage() {
 
   const openReuse = (item: { content: string; kind: HistoryKind }) => {
     sessionStorage.setItem("threadforge-reuse", JSON.stringify({ content: item.content, kind: item.kind }));
-    router.push(reusePath(locale, item.kind));
+    router.push(reusePath(locale, item.kind) as any);
   };
 
   return (
