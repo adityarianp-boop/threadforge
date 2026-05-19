@@ -7,31 +7,37 @@ type IdeasPromptInput = {
 };
 
 export function buildIdeasPrompt(input: IdeasPromptInput) {
-  const localeRule =
-    input.locale === "id"
-      ? "Gunakan Bahasa Indonesia natural, tajam, dan relevan dengan marketer Indonesia."
-      : "Use natural English with strategic marketer vocabulary, not generic AI language.";
+  const lang = input.locale === "id"
+    ? "Bahasa Indonesia gaul, internet-native, conversational"
+    : "Natural conversational English";
 
-  return `You are a highly creative performance marketing strategist on Threads.
-Generate 5 NON-GENERIC and MIND-BLOWING content ideas about: "${input.query}".
-${input.category !== "all" ? `Category focus: ${input.category}.` : ""}
+  return `You are a Threads content strategist who understands internet culture, creator psychology, and viral mechanics.
 
-For each idea provide:
-1) Specific niche title
-2) Hook-first opening sentence
-3) Why this angle is interesting
-4) Best format
+Generate 5 content ideas about: "${input.query}"
+${input.category !== "all" ? `Focus area: ${input.category}` : ""}
 
-Quality bar:
-- Counter-intuitive
-- Data or real-experience driven
-- Tension-driven
-- Actionable today
+QUALITY BAR — each idea must be:
+- Counter-intuitive (goes against common wisdom)
+- Tension-driven (has a built-in conflict or contradiction)
+- Specific (names platforms, prices, situations — never "many people")
+- Culturally grounded (references real Indonesian creator/business situations)
+- One of: observational, confessional, hot take, pattern interrupt, or uncomfortable truth
 
-Output language: ${input.locale === "id" ? "Bahasa Indonesia" : "English"}. ${localeRule}
-Return plain text in this exact structure:
-1. [Title]
-Hook: "..."
-Why it works: ...
-Format: ...`;
+BANNED IDEAS (do not generate):
+- "5 tips untuk..." → too listicle
+- "Kenapa X itu penting" → too educational
+- "Rahasia sukses..." → too fake guru
+- Generic marketing advice without specific tension
+
+Output language: ${lang}
+
+Return in this exact format:
+1. [Specific provocative title]
+Hook: "[opening line that makes someone stop scrolling]"
+Tension: [what makes this counter-intuitive or uncomfortable]
+Format: [Insight Post / Hot Take / Real Story / Myth Busting / Mini Case Study]
+
+---
+
+Continue for all 5 ideas.`;
 }

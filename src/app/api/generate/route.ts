@@ -57,6 +57,7 @@ export async function POST(req: Request) {
           body: JSON.stringify({
             model,
             max_tokens: 1000,
+            temperature: 0.95,
             messages: [{ role: "user", content: prompt }]
           })
         });

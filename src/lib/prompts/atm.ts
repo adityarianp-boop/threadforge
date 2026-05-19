@@ -8,46 +8,59 @@ type AtmPromptInput = {
 export function buildAtmPrompt(input: AtmPromptInput) {
   const defaultContext =
     input.locale === "id"
-      ? "performance marketer, fokus di Meta Ads dan growth strategy untuk brand Indonesia"
-      : "performance marketer focused on Meta Ads and growth strategy";
+      ? "kreator konten Indonesia, aktif di Threads, fokus membangun personal brand yang autentik"
+      : "Indonesian content creator on Threads focused on authentic personal branding";
 
   const creatorContext = input.context?.trim() || defaultContext;
+  const lang = input.locale === "id" ? "Bahasa Indonesia gaul, conversational, internet-native" : "Natural conversational English";
 
-  return `You are a viral content strategist who specializes in Indonesian Threads culture.
+  return `You are a viral content strategist specializing in Indonesian Threads culture and creator psychology.
 
-Your job is NOT to paraphrase. Your job is to STRATEGICALLY REMIX.
+TASK: Perform ATM analysis (Amati, Tiru, Modifikasi) on the post below.
 
-Analyze this original post and create a creator-specific adaptation:
-=== ORIGINAL POST ===
+=== POST TO ANALYZE ===
 ${input.content}
-===================
+======================
 
 Creator context: ${creatorContext}
 ${input.variantInstruction ? `Variant direction: ${input.variantInstruction}` : ""}
 
-ANALYSIS FRAMEWORK:
-1. Hook type: what psychological trigger does the opener use? (curiosity gap / contradiction / confession / shocking fact / pattern interrupt)
-2. Emotional arc: how does tension build and release across the post?
-3. Identity signal: what does this post say about WHO the writer is?
-4. Engagement mechanic: why would someone reply, share, or save this?
-5. Structural rhythm: how are short/long sentences alternated for pacing?
+ANALYSIS INSTRUCTIONS:
 
-REMIX RULES:
-- Extract the STRATEGIC STRUCTURE, not the words
-- Adapt to creator context completely — different industry, different examples, different voice
-- Hook must be completely new but use the same psychological trigger type
-- Maintain the same emotional arc (tension → insight → resolution)
-- Output must feel like it was written by the creator, not translated
-- Use "lo/gue" and Indonesian gaul naturally
+AMATI — Analyze these dimensions (write in ${lang}):
+- Hook type: what psychological trigger? (curiosity gap / contradiction / confession / shocking fact / pattern interrupt / identity signal)
+- Emotional arc: how does tension build across the post?
+- Identity signal: what does this reveal about the writer's worldview?
+- Engagement mechanic: why would someone reply, share, or save this?
+- Pacing: how do short/long sentences create rhythm?
+Write 3-4 sentences. Be specific, not generic.
+
+TIRU — Extract the reusable framework (write in ${lang}):
+- The hook pattern (not the words, the psychological structure)
+- The tension-building method
+- The resolution/closing style
+- How to adapt this to ANY niche
+Write 3-4 sentences. Make it actionable.
+
+MODIFIKASI — Write a full remixed post (write in ${lang}):
+- New hook using the SAME psychological trigger type
+- Same emotional arc and pacing
+- Completely adapted to creator context: ${creatorContext}
+- Different examples, different industry references
+- Must feel written by a real creator, NOT an AI
 - 150-250 words
 - No hashtags, no emoji labels
+- Sound like: a real person thinking out loud on Threads at midnight
+- Do NOT sound like: a marketing coach, LinkedIn guru, or AI assistant
 
-Output language: ${input.locale === "id" ? "Bahasa Indonesia gaul, conversational" : "Natural English"}.
+CRITICAL OUTPUT RULES:
+1. Your ENTIRE response must be valid JSON
+2. Start with { and end with }
+3. No text before {, no text after }
+4. No markdown fences, no code blocks
+5. Use double quotes for all strings
+6. Escape any quotes inside strings with backslash
 
-Return JSON ONLY, no markdown fences, no explanation:
-{
-  "amati": "Strategic analysis: hook type used, emotional arc structure, identity signals, engagement mechanics, and pacing rhythm. Be specific and actionable. (4-5 sentences)",
-  "tiru": "Extracted framework: the reusable strategic template — hook pattern, tension-building method, resolution style, and how to adapt this structure to any niche. (3-4 sentences)",
-  "modifikasi": "Full remixed post adapted for this creator. New hook using same psychological trigger, same emotional arc, completely different examples and voice. Ready to post."
-}`;
+Required JSON structure:
+{"amati": "your analysis here", "tiru": "your framework here", "modifikasi": "your remixed post here"}`;
 }
